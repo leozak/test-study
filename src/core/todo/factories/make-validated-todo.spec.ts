@@ -1,11 +1,8 @@
-import {
-  InvalidTodo,
-  makeValidatedTodo,
-  ValidTodo,
-} from "./make-validated-todo";
-import * as sanitizeStrMod from "@/app/utils/sanitize-str";
+import { makeValidatedTodo } from "./make-validated-todo";
 import * as makeNewTodoMod from "./make-new-todo";
-import * as validateTodoDescriptionMod from "@/app/core/todo/schemas/validate-todo-description";
+import * as sanitizeStrMod from "@/app/utils/sanitize-str";
+import * as validateTodoDescriptionMod from "@/core/todo/schemas/validate-todo-description";
+import type { InvalidTodo, ValidTodo } from "@/core/todo/schemas/todo.contract";
 
 describe("makeValidatedTodo (unit)", () => {
   test("deve chamar a função sanitizeStr com o valor correto", () => {
@@ -36,9 +33,9 @@ describe("makeValidatedTodo (unit)", () => {
 
     expect(result.success).toBe(true);
 
-    expect(result.data.id).toBe("any-id");
-    expect(result.data.description).toBe("abcd");
-    expect(result.data.createdAt).toBe("any-created-at-date");
+    expect(result.todo.id).toBe("any-id");
+    expect(result.todo.description).toBe("abcd");
+    expect(result.todo.createdAt).toBe("any-created-at-date");
   });
 
   test("deve chamar retornar um erro se validateTodoDescription retornar erro", () => {
